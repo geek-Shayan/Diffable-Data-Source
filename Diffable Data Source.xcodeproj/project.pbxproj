@@ -13,6 +13,7 @@
 		1A241F1129BD92AE002BD0B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A241F0F29BD92AE002BD0B8 /* Main.storyboard */; };
 		1A241F1329BD92B0002BD0B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A241F1229BD92B0002BD0B8 /* Assets.xcassets */; };
 		1A241F1629BD92B0002BD0B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A241F1429BD92B0002BD0B8 /* LaunchScreen.storyboard */; };
+		CF18703005C8D2CCFF19C682 /* Pods_Diffable_Data_Source.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441C0ECFCBF91F346C58B84C /* Pods_Diffable_Data_Source.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		1A241F1229BD92B0002BD0B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A241F1529BD92B0002BD0B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A241F1729BD92B0002BD0B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		441C0ECFCBF91F346C58B84C /* Pods_Diffable_Data_Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Diffable_Data_Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48A4DD9FAEDE71FE3CAB69EB /* Pods-Diffable Data Source.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diffable Data Source.debug.xcconfig"; path = "Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source.debug.xcconfig"; sourceTree = "<group>"; };
+		84FF9FB48D8700F70386573A /* Pods-Diffable Data Source.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diffable Data Source.release.xcconfig"; path = "Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF18703005C8D2CCFF19C682 /* Pods_Diffable_Data_Source.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				1A241F0829BD92AE002BD0B8 /* Diffable Data Source */,
 				1A241F0729BD92AE002BD0B8 /* Products */,
+				310A50DDD9E4392F49D5C31E /* Pods */,
+				1E5948A948B770FB8D6DAB91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = "Diffable Data Source";
 			sourceTree = "<group>";
 		};
+		1E5948A948B770FB8D6DAB91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				441C0ECFCBF91F346C58B84C /* Pods_Diffable_Data_Source.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		310A50DDD9E4392F49D5C31E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48A4DD9FAEDE71FE3CAB69EB /* Pods-Diffable Data Source.debug.xcconfig */,
+				84FF9FB48D8700F70386573A /* Pods-Diffable Data Source.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A241F1A29BD92B0002BD0B8 /* Build configuration list for PBXNativeTarget "Diffable Data Source" */;
 			buildPhases = (
+				C72A4FA32FCA2149A6BE2219 /* [CP] Check Pods Manifest.lock */,
 				1A241F0229BD92AE002BD0B8 /* Sources */,
 				1A241F0329BD92AE002BD0B8 /* Frameworks */,
 				1A241F0429BD92AE002BD0B8 /* Resources */,
+				EE0A1450326C627F7D036C65 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C72A4FA32FCA2149A6BE2219 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Diffable Data Source-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE0A1450326C627F7D036C65 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A241F0229BD92AE002BD0B8 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		1A241F1B29BD92B0002BD0B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48A4DD9FAEDE71FE3CAB69EB /* Pods-Diffable Data Source.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -309,6 +379,7 @@
 		};
 		1A241F1C29BD92B0002BD0B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84FF9FB48D8700F70386573A /* Pods-Diffable Data Source.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

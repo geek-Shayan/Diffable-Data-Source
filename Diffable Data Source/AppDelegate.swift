@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Rudder
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //rudder config v2
+        let writeKey = "2MwlD3XeA9errunTsvFWURLkcko"
+        let dataPlaneUrl = "https://nexdecadevhx.dataplane.rudderstack.com"
+        
+//        let builder = RSConfig(writeKey: writeKey)
+//         // .withDataPlaneUrl("https://nexdecadevhx.dataplane.rudderstack.com")
+//        RSClient.initialize()
+        
+        let config: RSConfig = RSConfig(writeKey: writeKey)
+                          .dataPlaneURL(dataPlaneUrl)
+                          .trackLifecycleEvents(true)
+                          .recordScreenViews(true)
+                
+        RSClient.sharedInstance().configure(with: config)
+        
         return true
     }
 

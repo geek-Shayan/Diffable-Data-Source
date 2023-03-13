@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import Rudder
 
 class ViewController: UIViewController, UITableViewDelegate {
 
-//class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewFlowLayout {
+//class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 //
 //    let collectionView: UICollectionView = {
 //
-//        let layout = UICollectionViewFlowLayout()
+////        let layout = UICollectionViewFlowLayout()
 //        let collection = UICollectionView()
 //        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 //
@@ -21,6 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 //
 //        return collection
 //    }()
+//
 //
 //
 //    enum Section {
@@ -44,6 +46,8 @@ class ViewController: UIViewController, UITableViewDelegate {
 //        view.addSubview(collectionView)
 //        collectionView.frame = view.bounds
 //
+//        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+//
 //
 //
 //        datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -62,6 +66,11 @@ class ViewController: UIViewController, UITableViewDelegate {
 //        loadDatasource()
 //
 //    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 150, height: 150)
+//    }
+//
 //
 //
 //    @objc func didTapAdd() {
@@ -95,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 //     }
 //
 //
-//
+
     
     
 
@@ -123,6 +132,13 @@ class ViewController: UIViewController, UITableViewDelegate {
 
             override func viewDidLoad() {
                 super.viewDidLoad()
+                
+                // rudder track
+                RSClient.sharedInstance().track("test_user_id_sadi", properties: [
+                    "key_1": "value_1",
+                    "key_2": "value_2"
+                ])
+                
 
                 tableView.delegate = self
                 view.addSubview(tableView)
@@ -164,8 +180,8 @@ class ViewController: UIViewController, UITableViewDelegate {
                 datasource.apply(snapshot)
             //        datasource.apply(snapshot, animatingDifferences: true, completion: nil)
              }
-    
-    
+
+
     
     
 }
