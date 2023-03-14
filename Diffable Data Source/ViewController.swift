@@ -19,7 +19,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.scrollDirection = .vertical
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+//        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collection.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
  
         return collection
     }()
@@ -50,15 +51,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
 
         datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//            cell.textLabel?.text = itemIdentifier.title
-//            cell.configure(with: itemIdentifier)
-            cell.contentView.backgroundColor = .systemRed
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
+//            cell.contentView.backgroundColor = .systemRed
+
+//            cell.myLabel.text = itemIdentifier.title
+            cell.setup(label: itemIdentifier.title)
+            
             return cell
         })
 
 
-        title = "my fruits"
+        title = "My Fruits"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(didTapAdd))
 
 
@@ -77,8 +81,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
 
         for x in 0...100 {
-            actionSheet.addAction(UIAlertAction(title: "fruit\(x+1)", style: .default, handler: { [weak self] _ in
-                let fruit = Fruit(title: "fruit\(x+1)")
+            actionSheet.addAction(UIAlertAction(title: "fruit \(x+1)", style: .default, handler: { [weak self] _ in
+                let fruit = Fruit(title: "fruit \(x+1)")
                 self?.fruits.append(fruit)
                 self?.updateDatasource()
             }))
