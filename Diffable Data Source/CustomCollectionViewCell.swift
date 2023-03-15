@@ -13,23 +13,27 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     private let myImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "carrot.fill")
+//        imageView.image = UIImage(systemName: "carrot.fill")
 //        imageView.image = UIImage(named: "bg")
-//        imageView.backgroundColor = .systemMint
+//        imageView.backgroundColor = .systemRed
         imageView.tintColor = .systemMint
         return imageView
     }()
     
     private let myLabel: UILabel = {
-        let Label = UILabel()
-//        Label.text = "Fruit"
-//        Label.backgroundColor = .green
-        return Label
+        let label = UILabel()
+        label.textColor = .systemMint
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.numberOfLines = 0
+//        label.text = "Fruit"
+//        label.backgroundColor = .green
+        return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemBlue
+//        contentView.backgroundColor = .systemBlue
         contentView.addSubview(myImage)
         contentView.addSubview(myLabel)
     }
@@ -41,14 +45,19 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         //        myLabel.frame = contentView.bounds
-        myLabel.frame = CGRect(x: 5, y: contentView.frame.size.height-50, width: contentView.frame.size.width-10, height: 50)
+        myLabel.frame = CGRect(x: 0, y: contentView.frame.size.height-30, width: contentView.frame.size.width, height: 20)
         //        myImage.frame = contentView.bounds
-        myImage.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height-50)
+        myImage.frame = CGRect(x: 20, y: 0, width: contentView.frame.size.width-40, height: contentView.frame.size.height-40)
     }
     
     
-    func setup(label: String) {
-        myLabel.text = label
+//    func setup(label: String) {
+//        myLabel.text = label
+//    }
+    
+    func setup(fruit: ViewController.Fruit) {
+        myLabel.text = fruit.title
+        myImage.image = fruit.image
     }
     
 }

@@ -57,11 +57,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     enum Section {
         case first
-        case second ///fvshbvkdshiudvhiszvhdsou
+        case second 
     }
 
     struct Fruit: Hashable {
         let title: String
+        let image: UIImage!
     }
 
     var fruits = [Fruit]()
@@ -85,7 +86,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: segmentControl)
         
         
-        //table view viewDidLoad
+        // MARK: - table view viewDidLoad
+        
         if segmentControl.selectedSegmentIndex == 0 {
             tableView.delegate = self
             view.addSubview(tableView)
@@ -94,14 +96,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
                 let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
 //                cell.textLabel?.text = itemIdentifier.title
-                cell.setup(label: itemIdentifier.title)
+//                cell.setup(label: itemIdentifier.title)
+                cell.setup(fruit: itemIdentifier)
                 return cell
             })
             
 //            loadDatasource()
         }
         
-        //collection view viewDidLoad
+        
+        // MARK: - collection view viewDidLoad
+        
         if segmentControl.selectedSegmentIndex == 1 {
             collectionView.delegate = self
             view.addSubview(collectionView)
@@ -109,13 +114,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
             collectionView.collectionViewLayout = UICollectionViewFlowLayout()
 
-
             collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
     //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
     //            cell.contentView.backgroundColor = .systemRed
     //            cell.myLabel.text = itemIdentifier.title
-                cell.setup(label: itemIdentifier.title)
+    //            cell.setup(label: itemIdentifier.title)
+                cell.setup(fruit: itemIdentifier)
                 return cell
             })
 
@@ -123,22 +128,32 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
 
     }
+    
+    
+    
+    // MARK: - table view functions
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(100)
     }
     
+    
+    // MARK: - collection view functions
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 120)
     }
 
+    
+    
+    // MARK: - add
 
     @objc func didTapAdd() {
         let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
 
         for x in 0...100 {
             actionSheet.addAction(UIAlertAction(title: "fruit \(x+1)", style: .default, handler: { [weak self] _ in
-                let fruit = Fruit(title: "fruit \(x+1)")
+                let fruit = Fruit(title: "fruit \(x+1)", image: UIImage(systemName: "\(x+1).circle"))
                 self?.fruits.append(fruit)
                 self?.updateDatasource()
             }))
@@ -147,6 +162,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         actionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         present(actionSheet, animated: true)
     }
+    
+    
+    
+    // MARK: - datasource management
 
     func loadDatasource() {
         var initialSnapshot = NSDiffableDataSourceSnapshot<Section, Fruit>()
@@ -178,6 +197,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
      }
     
+        
+    
+    // MARK: - selection changing
     
     @objc func selectionChanged() {
         switch segmentControl.selectedSegmentIndex {
@@ -188,7 +210,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
                 tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
                     let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-                    cell.setup(label: itemIdentifier.title)
+                    cell.setup(fruit: itemIdentifier)
                     return cell
                 })
                 
@@ -205,7 +227,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
                 collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-                    cell.setup(label: itemIdentifier.title)
+                    cell.setup(fruit: itemIdentifier)
                     return cell
                 })
                 
