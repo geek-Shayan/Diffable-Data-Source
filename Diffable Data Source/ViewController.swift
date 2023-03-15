@@ -9,8 +9,6 @@ import UIKit
 import Rudder
 
 
-//class ViewController: UIViewController, UITableViewDelegate {
-
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDelegate {
     
     
@@ -32,9 +30,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         return table
     }()
+    
 
         
     // MARK: - collection view properties
@@ -92,8 +92,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             tableView.frame = view.bounds
 
             tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                cell.textLabel?.text = itemIdentifier.title
+                let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+//                cell.textLabel?.text = itemIdentifier.title
+                cell.setup(label: itemIdentifier.title)
                 return cell
             })
             
@@ -123,10 +124,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     }
 
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(100)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 190, height: 200)
+        return CGSize(width: 120, height: 120)
     }
 
 
@@ -184,12 +187,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 tableView.frame = view.bounds
 
                 tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                    cell.textLabel?.text = itemIdentifier.title
+                    let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+                    cell.setup(label: itemIdentifier.title)
                     return cell
                 })
                 
-                fruits = []
+//                fruits = []
                 updateDatasource()
                 
                 
@@ -206,7 +209,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     return cell
                 })
                 
-                fruits = []
+//                fruits = []
                 updateDatasource()
 
             default:
