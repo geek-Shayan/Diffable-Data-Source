@@ -89,18 +89,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // MARK: - table view viewDidLoad
         
         if segmentControl.selectedSegmentIndex == 0 {
-            tableView.delegate = self
-            view.addSubview(tableView)
-            tableView.frame = view.bounds
-
-            tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-                let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-//                cell.textLabel?.text = itemIdentifier.title
-//                cell.setup(label: itemIdentifier.title)
-                cell.setup(fruit: itemIdentifier)
-                return cell
-            })
             
+            // MARK: - rudder stack track
+            RSClient.sharedInstance().track("viewDidLoad_0_sadi", properties: [
+                "viewDidLoad": "1",
+                "selectedSegmentIndex": "0"
+            ])
+            
+            tableViewDidLoad()
 //            loadDatasource()
         }
         
@@ -108,22 +104,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // MARK: - collection view viewDidLoad
         
         if segmentControl.selectedSegmentIndex == 1 {
-            collectionView.delegate = self
-            view.addSubview(collectionView)
-            collectionView.frame = view.bounds
-
-            collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-
-            collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-    //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-    //            cell.contentView.backgroundColor = .systemRed
-    //            cell.myLabel.text = itemIdentifier.title
-    //            cell.setup(label: itemIdentifier.title)
-                cell.setup(fruit: itemIdentifier)
-                return cell
-            })
-
+            
+            // MARK: - rudder stack track
+            RSClient.sharedInstance().track("viewDidLoad_1_sadi", properties: [
+                "viewDidLoad": "1",
+                "selectedSegmentIndex": "1"
+            ])
+            
+            collectionViewDidLoad()
 //            loadDatasource()
         }
 
@@ -144,25 +132,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return CGSize(width: 120, height: 120)
     }
 
-    
-    
-    // MARK: - add
-
-    @objc func didTapAdd() {
-        let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
-
-        for x in 0...100 {
-            actionSheet.addAction(UIAlertAction(title: "fruit \(x+1)", style: .default, handler: { [weak self] _ in
-                let fruit = Fruit(title: "fruit \(x+1)", image: UIImage(systemName: "\(x+1).circle"))
-                self?.fruits.append(fruit)
-                self?.updateDatasource()
-            }))
-        }
-
-        actionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-        present(actionSheet, animated: true)
-    }
-    
     
     
     // MARK: - datasource management
@@ -197,39 +166,93 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
      }
     
+    
+    
+    // MARK: - viewDidLoad refactoring
+    
+    func tableViewDidLoad() {
+        tableView.delegate = self
+        view.addSubview(tableView)
+        tableView.frame = view.bounds
+
+        tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+//                cell.textLabel?.text = itemIdentifier.title
+//                cell.setup(label: itemIdentifier.title)
+            cell.setup(fruit: itemIdentifier)
+            return cell
+        })
+    }
+    
+    
+    func collectionViewDidLoad() {
+        collectionView.delegate = self
+        view.addSubview(collectionView)
+        collectionView.frame = view.bounds
+
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+
+        collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
+//            cell.contentView.backgroundColor = .systemRed
+//            cell.myLabel.text = itemIdentifier.title
+//            cell.setup(label: itemIdentifier.title)
+            cell.setup(fruit: itemIdentifier)
+            return cell
+        })
+    }
+    
+    
+    
+    // MARK: - add
+
+    @objc func didTapAdd() {
+        let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
+
+        for x in 0...100 {
+            actionSheet.addAction(UIAlertAction(title: "fruit \(x+1)", style: .default, handler: { [weak self] _ in
+                let fruit = Fruit(title: "fruit \(x+1)", image: UIImage(systemName: "\(x+1).circle"))
+                self?.fruits.append(fruit)
+                
+                
+                // MARK: - rudder stack track
+                RSClient.sharedInstance().track("didTapAdd_sadi", properties: [
+                    "viewDidLoad": "1",
+                    "fruit": fruit
+                ])
+                
+                self?.updateDatasource()
+
+            }))
+        }
+
+        actionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
+        present(actionSheet, animated: true)
+    }
+    
         
     
     // MARK: - selection changing
     
     @objc func selectionChanged() {
+        
+        // MARK: - rudder stack track
+        RSClient.sharedInstance().track("selectionChanged_sadi", properties: [
+            "viewDidLoad": "1",
+            "selectedSegmentIndex": segmentControl.selectedSegmentIndex
+        ])
+        
         switch segmentControl.selectedSegmentIndex {
             case 0:
-                tableView.delegate = self
-                view.addSubview(tableView)
-                tableView.frame = view.bounds
+                tableViewDidLoad()
 
-                tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-                    let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
-                    cell.setup(fruit: itemIdentifier)
-                    return cell
-                })
-                
 //                fruits = []
                 updateDatasource()
                 
                 
             case 1:
-                collectionView.delegate = self
-                view.addSubview(collectionView)
-                collectionView.frame = view.bounds
-
-                collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-
-                collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
-                    cell.setup(fruit: itemIdentifier)
-                    return cell
-                })
+                collectionViewDidLoad()
                 
 //                fruits = []
                 updateDatasource()
