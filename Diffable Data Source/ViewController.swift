@@ -86,15 +86,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: segmentControl)
         
         
+        
+        // MARK: - rudder stack track
+        RSClient.sharedInstance().track("viewDidLoad_sadi", properties: [
+            "viewDidLoad": "true",
+            "selectedSegmentIndex": segmentControl.selectedSegmentIndex,
+            "fruit": fruits
+        ])
+        
+        
         // MARK: - table view viewDidLoad
         
         if segmentControl.selectedSegmentIndex == 0 {
-            
-            // MARK: - rudder stack track
-            RSClient.sharedInstance().track("viewDidLoad_0_sadi", properties: [
-                "viewDidLoad": "1",
-                "selectedSegmentIndex": "0"
-            ])
             
             tableViewDidLoad()
 //            loadDatasource()
@@ -104,12 +107,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // MARK: - collection view viewDidLoad
         
         if segmentControl.selectedSegmentIndex == 1 {
-            
-            // MARK: - rudder stack track
-            RSClient.sharedInstance().track("viewDidLoad_1_sadi", properties: [
-                "viewDidLoad": "1",
-                "selectedSegmentIndex": "1"
-            ])
             
             collectionViewDidLoad()
 //            loadDatasource()
@@ -205,24 +202,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     
-    // MARK: - add
+    // MARK: - add fruits
 
     @objc func didTapAdd() {
+        
+        // MARK: - rudder stack track
+        RSClient.sharedInstance().track("didTapAdd_sadi", properties: [
+            "actionSheet": "open"
+        ])
+        
+        
         let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
 
-        for x in 0...100 {
-            actionSheet.addAction(UIAlertAction(title: "fruit \(x+1)", style: .default, handler: { [weak self] _ in
-                let fruit = Fruit(title: "fruit \(x+1)", image: UIImage(systemName: "\(x+1).circle"))
-                self?.fruits.append(fruit)
+        for x in 1...50 {
+            actionSheet.addAction(UIAlertAction(title: "fruit \(x)", style: .default, handler: { [weak self] _ in
+                let fruit = Fruit(title: "fruit \(x)", image: UIImage(systemName: "\(x).circle"))
                 
+                // matching error handling
+                var matching = self?.fruits.contains(where: { $0.title == "fruit \(x)" }) // Returns true
                 
-                // MARK: - rudder stack track
-                RSClient.sharedInstance().track("didTapAdd_sadi", properties: [
-                    "viewDidLoad": "1",
-                    "fruit": fruit
-                ])
+                if (matching) == true {
+                    let alert = UIAlertController(title: "Error!", message: "Unique selection required.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "cancel", style: .destructive))
+                    self?.present(alert, animated: true)
+                }
                 
-                self?.updateDatasource()
+                if (matching) == false {
+                    self?.fruits.append(fruit)
+                    self?.updateDatasource()
+                }
 
             }))
         }
@@ -240,20 +248,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // MARK: - rudder stack track
         RSClient.sharedInstance().track("selectionChanged_sadi", properties: [
             "viewDidLoad": "1",
-            "selectedSegmentIndex": segmentControl.selectedSegmentIndex
+            "selectedSegmentIndex": segmentControl.selectedSegmentIndex,
+            "fruits": fruits
         ])
         
         switch segmentControl.selectedSegmentIndex {
             case 0:
                 tableViewDidLoad()
-
 //                fruits = []
                 updateDatasource()
-                
-                
+    
             case 1:
                 collectionViewDidLoad()
-                
 //                fruits = []
                 updateDatasource()
 
