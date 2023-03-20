@@ -85,6 +85,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(didTapAdd))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: segmentControl)
         
+//        view.addSubview(UIImageView(image: UIImage(named: "bg")))
+        
         
         
         // MARK: - rudder stack track
@@ -171,11 +173,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         tableView.delegate = self
         view.addSubview(tableView)
         tableView.frame = view.bounds
+        tableView.backgroundView = UIImageView(image: UIImage(named: "bg"))
+        tableView.backgroundColor = .clear
 
         tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
 //                cell.textLabel?.text = itemIdentifier.title
 //                cell.setup(label: itemIdentifier.title)
+//                cell.contentView.alpha = 0.4
+            cell.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
             cell.setup(fruit: itemIdentifier)
             return cell
         })
@@ -186,6 +192,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
+        collectionView.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
+        collectionView.backgroundColor = .clear
 
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
 
@@ -195,9 +203,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //            cell.contentView.backgroundColor = .systemRed
 //            cell.myLabel.text = itemIdentifier.title
 //            cell.setup(label: itemIdentifier.title)
+            cell.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
             cell.setup(fruit: itemIdentifier)
             return cell
         })
+    }
+    
+    
+    // MARK: - clearing previous loaded views
+    
+    func removeSubviews() {
+        tableView.removeFromSuperview()
+        collectionView.removeFromSuperview()
     }
     
     
@@ -219,7 +236,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let fruit = Fruit(title: "fruit \(x)", image: UIImage(systemName: "\(x).circle"))
                 
                 // matching error handling
-                var matching = self?.fruits.contains(where: { $0.title == "fruit \(x)" }) // Returns true
+                let matching = self?.fruits.contains(where: { $0.title == "fruit \(x)" }) // Returns true
                 
                 if (matching) == true {
                     let alert = UIAlertController(title: "Error!", message: "Unique selection required.", preferredStyle: .alert)
@@ -254,11 +271,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         switch segmentControl.selectedSegmentIndex {
             case 0:
+                removeSubviews()
+                
                 tableViewDidLoad()
 //                fruits = []
                 updateDatasource()
     
             case 1:
+                removeSubviews()
+                
                 collectionViewDidLoad()
 //                fruits = []
                 updateDatasource()
