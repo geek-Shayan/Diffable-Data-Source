@@ -11,23 +11,32 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
     
+//    layer.cornerRadius = 12
+    
     private let myImage: UIImageView = {
         let imageView = UIImageView()
 //        imageView.image = UIImage(systemName: "carrot.fill")
-//        imageView.image = UIImage(named: "bg")
+//        imageView.image = UIImage(named: "bg 4")
 //        imageView.backgroundColor = .systemRed
         imageView.tintColor = .systemMint
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 55
         return imageView
     }()
     
     private let myLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemMint
+//        label.text = "Fruit"
+//        label.textColor = .systemMint
+        label.textColor = .lightText
+        label.backgroundColor = .separator
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 0
-//        label.text = "Fruit"
-//        label.backgroundColor = .green
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 5
         return label
     }()
     
@@ -36,6 +45,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
 //        contentView.backgroundColor = .systemBlue
         contentView.addSubview(myImage)
         contentView.addSubview(myLabel)
+//        backgroundView = UIImageView(image: UIImage(named: "bg 4"))
     }
     
     required init?(coder: NSCoder) {
@@ -45,9 +55,11 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         //        myLabel.frame = contentView.bounds
-        myLabel.frame = CGRect(x: 0, y: contentView.frame.size.height-30, width: contentView.frame.size.width, height: 20)
+//        myLabel.frame = CGRect(x: 0, y: contentView.frame.size.height-30, width: contentView.frame.size.width, height: 20)
+        myLabel.frame = CGRect(x: 0, y: contentView.frame.size.height/2-10, width: contentView.frame.size.width, height: 20)
         //        myImage.frame = contentView.bounds
-        myImage.frame = CGRect(x: 20, y: 0, width: contentView.frame.size.width-40, height: contentView.frame.size.height-40)
+//        myImage.frame = CGRect(x: 20, y: 10, width: contentView.frame.size.width-40, height: contentView.frame.size.height-40)
+        myImage.frame = CGRect(x: 5, y: 5, width: contentView.frame.size.width-10, height: contentView.frame.size.height-10)
     }
     
     

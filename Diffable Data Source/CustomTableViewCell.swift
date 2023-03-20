@@ -18,16 +18,24 @@ class CustomTableViewCell: UITableViewCell {
 //        imageView.image = UIImage(named: "bg")
 //        imageView.backgroundColor = .systemRed
         imageView.tintColor = .systemMint
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 40
         return imageView
     }()
     
     private let myLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemMint
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.numberOfLines = 0
 //        label.text = "Fruit"
 //        label.backgroundColor = .green
+//        label.textColor = .systemMint
+//        label.backgroundColor = .separator
+        label.textColor = .lightText
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.numberOfLines = 0
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 5
         return label
         
     }()
@@ -39,7 +47,7 @@ class CustomTableViewCell: UITableViewCell {
 //        contentView.backgroundColor = .systemBlue
         contentView.addSubview(myImage)
         contentView.addSubview(myLabel)
-        
+        backgroundView = UIImageView(image: UIImage(named: "bg 4"))
     }
     
     
@@ -51,8 +59,8 @@ class CustomTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        myLabel.frame = CGRect(x: 20, y: 0, width: contentView.frame.size.width-110, height: contentView.frame.size.height)
-        myImage.frame = CGRect(x: contentView.frame.size.width-90, y: 10, width: 80, height: 80)
+        myLabel.frame = CGRect(x: 20, y: 0, width: contentView.frame.size.width-120, height: contentView.frame.size.height)
+        myImage.frame = CGRect(x: contentView.frame.size.width-100, y: 10, width: 80, height: 80)
     }
 
 

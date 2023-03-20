@@ -66,6 +66,38 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     var fruits = [Fruit]()
+    
+    
+    // MARK: - local data
+
+    private let fruitList: [Fruit] = [
+        Fruit(title: "Mango", image: UIImage(named: "mango")),
+        Fruit(title: "Banana", image: UIImage(named: "banana")),
+        Fruit(title: "Orange", image: UIImage(named: "orange")),
+        Fruit(title: "Pomegranad", image: UIImage(named: "pomegranad")),
+        Fruit(title: "Cherry", image: UIImage(named: "cherry")),
+        Fruit(title: "Kiwi", image: UIImage(named: "kiwi")),
+        Fruit(title: "Apple", image: UIImage(named: "apple")),
+        Fruit(title: "Pineapple", image: UIImage(named: "pineapple")),
+        Fruit(title: "Mango 1", image: UIImage(named: "mango")),
+        Fruit(title: "Banana 1", image: UIImage(named: "banana")),
+        Fruit(title: "Orange 1", image: UIImage(named: "orange")),
+        Fruit(title: "Pomegranad 1", image: UIImage(named: "pomegranad")),
+        Fruit(title: "Cherry 1", image: UIImage(named: "cherry")),
+        Fruit(title: "Kiwi 1", image: UIImage(named: "kiwi")),
+        Fruit(title: "Apple 1", image: UIImage(named: "apple")),
+        Fruit(title: "Pineapple 1", image: UIImage(named: "pineapple")),
+        Fruit(title: "Mango 2", image: UIImage(named: "mango")),
+        Fruit(title: "Banana 2", image: UIImage(named: "banana")),
+        Fruit(title: "Orange 2", image: UIImage(named: "orange")),
+        Fruit(title: "Pomegranad 2", image: UIImage(named: "pomegranad")),
+        Fruit(title: "Cherry 3", image: UIImage(named: "cherry")),
+        Fruit(title: "Kiwi 3", image: UIImage(named: "kiwi")),
+        Fruit(title: "Apple 3", image: UIImage(named: "apple")),
+        Fruit(title: "Pineapple 3", image: UIImage(named: "pineapple")),
+
+    ]
+
 
     
     
@@ -173,7 +205,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         tableView.delegate = self
         view.addSubview(tableView)
         tableView.frame = view.bounds
-        tableView.backgroundView = UIImageView(image: UIImage(named: "bg"))
+        tableView.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
         tableView.backgroundColor = .clear
 
         tableDatasource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
@@ -181,7 +213,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //                cell.textLabel?.text = itemIdentifier.title
 //                cell.setup(label: itemIdentifier.title)
 //                cell.contentView.alpha = 0.4
-            cell.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
+//            cell.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
             cell.setup(fruit: itemIdentifier)
             return cell
         })
@@ -192,7 +224,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
-        collectionView.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
+        collectionView.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
         collectionView.backgroundColor = .clear
 
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
@@ -203,7 +235,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //            cell.contentView.backgroundColor = .systemRed
 //            cell.myLabel.text = itemIdentifier.title
 //            cell.setup(label: itemIdentifier.title)
-            cell.backgroundView = UIImageView(image: UIImage(named: "bg 2"))
+//            cell.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
             cell.setup(fruit: itemIdentifier)
             return cell
         })
@@ -231,26 +263,45 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let actionSheet = UIAlertController(title: "Select Fruit", message: nil, preferredStyle: .actionSheet)
 
-        for x in 1...50 {
-            actionSheet.addAction(UIAlertAction(title: "fruit \(x)", style: .default, handler: { [weak self] _ in
-                let fruit = Fruit(title: "fruit \(x)", image: UIImage(systemName: "\(x).circle"))
-                
-                // matching error handling
-                let matching = self?.fruits.contains(where: { $0.title == "fruit \(x)" }) // Returns true
-                
-                if (matching) == true {
-                    let alert = UIAlertController(title: "Error!", message: "Unique selection required.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "cancel", style: .destructive))
-                    self?.present(alert, animated: true)
-                }
-                
-                if (matching) == false {
+        // MARK: - randomly generated data with matching item error handeling
+//        for x in 1...50 {
+//            actionSheet.addAction(UIAlertAction(title: "fruit \(x)", style: .default, handler: { [weak self] _ in
+//                let fruit = Fruit(title: "fruit \(x)", image: UIImage(systemName: "\(x).circle"))
+//
+//                // matching error handling
+//                let matching = self?.fruits.contains(where: { $0.title == "fruit \(x)" }) // Returns true
+//
+//                if (matching) == true {
+//                    let alert = UIAlertController(title: "Error!", message: "Unique selection required.", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "cancel", style: .destructive))
+//                    self?.present(alert, animated: true)
+//                }
+//
+//                if (matching) == false {
+//                    self?.fruits.append(fruit)
+//                    self?.updateDatasource()
+//                }
+//
+//            }))
+//        }
+        // MARK: - randomly generated data with matching item error handeling
+        
+        
+        // MARK: - pre generated data with dynamic selection item handeling
+        for x in fruitList {
+            let matching = self.fruits.contains(where: { $0.title == x.title && $0.image == x.image})
+            if (matching) {
+                continue
+            }
+            else {
+                actionSheet.addAction(UIAlertAction(title: x.title, style: .default, handler: { [weak self] _ in
+                    let fruit = Fruit(title: x.title, image: x.image)
                     self?.fruits.append(fruit)
                     self?.updateDatasource()
-                }
-
-            }))
+                }))
+            }
         }
+        // MARK: - pre generated data with dynamic selection item handeling
 
         actionSheet.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         present(actionSheet, animated: true)
