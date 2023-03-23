@@ -8,7 +8,7 @@
 import UIKit
 import Rudder
 
-@main
+ @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 

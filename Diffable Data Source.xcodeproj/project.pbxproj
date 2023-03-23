@@ -15,6 +15,7 @@
 		1A241F1329BD92B0002BD0B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A241F1229BD92B0002BD0B8 /* Assets.xcassets */; };
 		1A241F1629BD92B0002BD0B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A241F1429BD92B0002BD0B8 /* LaunchScreen.storyboard */; };
 		1A261F0F29C184400072B100 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A261F0E29C184400072B100 /* CustomTableViewCell.swift */; };
+		1A8E896C29C984BB003586DC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8E896B29C984BB003586DC /* DetailsViewController.swift */; };
 		CF18703005C8D2CCFF19C682 /* Pods_Diffable_Data_Source.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441C0ECFCBF91F346C58B84C /* Pods_Diffable_Data_Source.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		1A241F1529BD92B0002BD0B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A241F1729BD92B0002BD0B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A261F0E29C184400072B100 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		1A8E896B29C984BB003586DC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		441C0ECFCBF91F346C58B84C /* Pods_Diffable_Data_Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Diffable_Data_Source.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A4DD9FAEDE71FE3CAB69EB /* Pods-Diffable Data Source.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diffable Data Source.debug.xcconfig"; path = "Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source.debug.xcconfig"; sourceTree = "<group>"; };
 		84FF9FB48D8700F70386573A /* Pods-Diffable Data Source.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diffable Data Source.release.xcconfig"; path = "Target Support Files/Pods-Diffable Data Source/Pods-Diffable Data Source.release.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				1A241F0929BD92AE002BD0B8 /* AppDelegate.swift */,
 				1A241F0B29BD92AE002BD0B8 /* SceneDelegate.swift */,
 				1A241F0D29BD92AE002BD0B8 /* ViewController.swift */,
+				1A8E896B29C984BB003586DC /* DetailsViewController.swift */,
 				1A199B9A29C049AA0027C956 /* CustomCollectionViewCell.swift */,
 				1A261F0E29C184400072B100 /* CustomTableViewCell.swift */,
 				1A241F0F29BD92AE002BD0B8 /* Main.storyboard */,
@@ -217,6 +220,7 @@
 				1A241F0A29BD92AE002BD0B8 /* AppDelegate.swift in Sources */,
 				1A241F0C29BD92AE002BD0B8 /* SceneDelegate.swift in Sources */,
 				1A199B9B29C049AA0027C956 /* CustomCollectionViewCell.swift in Sources */,
+				1A8E896C29C984BB003586DC /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

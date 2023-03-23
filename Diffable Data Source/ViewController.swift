@@ -91,10 +91,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         Fruit(title: "Banana 2", image: UIImage(named: "banana")),
         Fruit(title: "Orange 2", image: UIImage(named: "orange")),
         Fruit(title: "Pomegranad 2", image: UIImage(named: "pomegranad")),
-        Fruit(title: "Cherry 3", image: UIImage(named: "cherry")),
-        Fruit(title: "Kiwi 3", image: UIImage(named: "kiwi")),
-        Fruit(title: "Apple 3", image: UIImage(named: "apple")),
-        Fruit(title: "Pineapple 3", image: UIImage(named: "pineapple")),
+        Fruit(title: "Cherry 2", image: UIImage(named: "cherry")),
+        Fruit(title: "Kiwi 2", image: UIImage(named: "kiwi")),
+        Fruit(title: "Apple 2", image: UIImage(named: "apple")),
+        Fruit(title: "Pineapple 2", image: UIImage(named: "pineapple")),
 
     ]
 
@@ -156,12 +156,31 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return CGFloat(100)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsViewController = mainStoryBoard.instantiateViewController(withIdentifier: DetailsViewController.identifier) as! DetailsViewController
+//        detailsViewController.title = "Fruit Details"
+        detailsViewController.setup(fruit: fruits[indexPath.row], backgroundImg: UIImage(named: "bg 4")!, navTitle: "Fruit Details")
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
+    
     
     // MARK: - collection view functions
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 120, height: 120)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsViewController = mainStoryBoard.instantiateViewController(withIdentifier: DetailsViewController.identifier) as! DetailsViewController
+//        detailsViewController.title = "Fruit Details"
+//        detailsViewController.setup(fruit: fruits[indexPath.row])
+        detailsViewController.setup(fruit: fruits[indexPath.row], backgroundImg: UIImage(named: "bg 4")!, navTitle: "Fruit Details")
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
+    
+    
 
     
     
