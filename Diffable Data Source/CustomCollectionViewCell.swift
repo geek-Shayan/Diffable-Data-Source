@@ -11,7 +11,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomCollectionViewCell"
     
-//    layer.cornerRadius = 12
     
     private let myImage: UIImageView = {
         let imageView = UIImageView()
@@ -23,8 +22,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 55
-//        imageView.layer.borderColor = CGColor(red: 0.0, green: 0.60, blue: 0.60, alpha: 1.0)
-//        imageView.layer.borderWidth = 10
+        imageView.layer.borderColor = CGColor(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.50)
+        imageView.layer.borderWidth = 5
         return imageView
     }()
     

@@ -43,6 +43,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 100, bottom: 10, right: 10)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -204,6 +205,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var snapshot = NSDiffableDataSourceSnapshot<Section, Fruit>()
         snapshot.appendSections([.first])
         snapshot.appendItems(fruits)
+//        snapshot.appendSections([.second])
+//        snapshot.appendItems(fruits)
+        
 
         if segmentControl.selectedSegmentIndex == 0 {
 //            tableDatasource.apply(snapshot)
