@@ -21,7 +21,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 55
+        imageView.layer.cornerRadius = 45
         imageView.layer.borderColor = CGColor(red: 0.60, green: 0.60, blue: 0.60, alpha: 0.50)
         imageView.layer.borderWidth = 5
         return imageView
