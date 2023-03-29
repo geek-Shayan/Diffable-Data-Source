@@ -43,7 +43,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 100, bottom: 10, right: 10)
+//        layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -249,8 +249,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.frame = view.bounds
         collectionView.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
         collectionView.backgroundColor = .clear
-
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
 
         collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
