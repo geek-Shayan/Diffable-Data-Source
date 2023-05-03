@@ -104,7 +104,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // MARK: - diff datasources properties
     
-    var collecttionDatasource: UICollectionViewDiffableDataSource<Section, Fruit>!
+    var collectionDatasource: UICollectionViewDiffableDataSource<Section, Fruit>!
     var tableDatasource: UITableViewDiffableDataSource<Section, Fruit>!
 
     
@@ -200,7 +200,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             )
         }
         if segmentControl.selectedSegmentIndex == 1 {
-            collecttionDatasource.apply(initialSnapshot, animatingDifferences: true)
+            collectionDatasource.apply(initialSnapshot, animatingDifferences: true)
         }
     }
 
@@ -218,8 +218,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             tableDatasource.apply(snapshot, animatingDifferences: true)
         }
         if segmentControl.selectedSegmentIndex == 1 {
-//            collecttionDatasource.apply(snapshot)
-            collecttionDatasource.apply(snapshot, animatingDifferences: true)
+//            collectionDatasource.apply(snapshot)
+            collectionDatasource.apply(snapshot, animatingDifferences: true)
         }
         
      }
@@ -254,7 +254,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.backgroundView = UIImageView(image: UIImage(named: "bg 4"))
         collectionView.backgroundColor = .clear
 
-        collecttionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        collectionDatasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as! CustomCollectionViewCell
 //            cell.contentView.backgroundColor = .systemRed
