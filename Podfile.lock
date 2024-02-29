@@ -1,0 +1,16 @@
+PODS:
+  - Rudder (2.0.1)
+
+DEPENDENCIES:
+  - Rudder (~> 2.0.0)
+
+SPEC REPOS:
+  trunk:
+    - Rudder
+
+SPEC CHECKSUMS:
+  Rudder: 463af33116984b97f2a19d344e9ad491f164e43e
+
+PODFILE CHECKSUM: fcb3ef06dea2d455049219159a13859569ff6ecf
+
+COCOAPODS: 1.12.0
